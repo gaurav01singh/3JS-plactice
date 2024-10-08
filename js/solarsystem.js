@@ -16,10 +16,12 @@ import neptuneTexture from "../img/neptune.jpg";
 import plutoTexture from "../img/pluto.jpg";
 
 
-  const renderer = new THREE.WebGLRenderer();
+const see = document.getElementById('see'); // Fixed getElementById
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: see });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.shadowMap.enabled = true;
 
   const scene = new THREE.Scene();
 

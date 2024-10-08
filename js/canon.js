@@ -2,10 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as CANNON from "cannon-es";
 
-const renderer = new THREE.WebGLRenderer();
+const see = document.getElementById('see'); // Fixed getElementById
 
+const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: see });
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.shadowMap.enabled = true;
 
 const scene = new THREE.Scene();
 
@@ -27,7 +29,7 @@ const pointLight = new THREE.PointLight(0xffffff, 500)
 pointLight.castShadow = true
 
 const boxgeo = new THREE.BoxGeometry(2, 2, 2);
-const boxmet = new THREE.MeshBasicMaterial({
+const boxmet = new THREE.MeshStandardMaterial({
   color: 0x00ff00,
   side: THREE.DoubleSide,
   wireframe: false,
@@ -35,6 +37,7 @@ const boxmet = new THREE.MeshBasicMaterial({
 const box = new THREE.Mesh(boxgeo, boxmet);
 scene.add(box);
 box.castShadow = true;
+box.receiveShadow = true
 
 
 const sphereGeometry = new THREE.SphereGeometry(2,10,10);
@@ -46,6 +49,7 @@ const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 scene.add(sphere);
 sphere.castShadow = true;
 sphere.add(pointLight)
+pointLight.position.set(0,1,0)
 
 
 const planeGeometry = new THREE.PlaneGeometry(30, 30);

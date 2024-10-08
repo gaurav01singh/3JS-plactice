@@ -2,12 +2,14 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-const dogUrl = new URL("../assests/Soldier.glb", import.meta.url);
+const dogUrl = new URL("../assests/doggo2.glb", import.meta.url);
 
-const renderer = new THREE.WebGLRenderer();
+const see = document.getElementById('see'); // Fixed getElementById
 
+const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: see });
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.shadowMap.enabled = true;
 
 const scene = new THREE.Scene();
 
