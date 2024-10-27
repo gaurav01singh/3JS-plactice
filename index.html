@@ -8,10 +8,13 @@
         body{
             margin: 0;
         }
+       
     </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <canvas id="see"></canvas>
+    <button id="resetButton">Reset Camera</button>
     <!-- <script id="vertexShader" type="vertex">
         void main() {
             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -22,7 +25,9 @@
             gl_FragColor = vec4(1.0, 0.1, 0.3, 1.0);
         }
     </script> -->
-    <script type="module" src="./js/clickevn.js"></script>
+    <!-- <script type="module" src="./js/clickevn.js"></script> -->
+    <script type="module" src="./js/cameramovment.js"></script>
+    <!-- <script type="module" src="./js/weba.js"></script> -->
     <!-- <script type="module" src="./js/doganimation.js"></script> -->
     <!-- <script type="module" src="./js/solarsystem.js"></script> -->
     <!-- <script type="module" src="./js/canon.js"></script> -->

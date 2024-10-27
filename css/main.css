@@ -1,0 +1,17 @@
+canvas{
+    position: fixed ;
+    top: 0;
+    left: 0;
+}
+#resetButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
