@@ -36,11 +36,9 @@ scene.add(new THREE.PointLightHelper(pointLight));
 const gridHelper = new THREE.GridHelper(50, 50);
 scene.add(gridHelper);
 
-// Create multiple meshes and add them to an array
 const meshes = [];
 const colors = [0x0077ff, 0xff0077, 0x77ff00, 0xff7700];  // Colors for each mesh
 
-// Function to create and add a mesh to the scene and array
 function createMesh(geometry, color, position) {
     const material = new THREE.MeshStandardMaterial({ color });
     const mesh = new THREE.Mesh(geometry, material);
@@ -49,37 +47,30 @@ function createMesh(geometry, color, position) {
     meshes.push(mesh);
 }
 
-// Create and add different shapes to the scene
 createMesh(new THREE.BoxGeometry(1, 1, 1), colors[0], [0, 0.5, 0]);
 createMesh(new THREE.SphereGeometry(0.5, 32, 32), colors[1], [-3, 0.5, 0]);
 createMesh(new THREE.ConeGeometry(0.5, 1, 32), colors[2], [3, 0.5, 0]);
-createMesh(new THREE.TorusGeometry(0.5, 0.2, 16, 100), colors[3], [0, 0.5, -3]);
+createMesh(new THREE.TorusGeometry(0.5, 0.2, 16, 100), colors[3], [0,2.5, 0]);
 
-// Raycaster for detecting clicks on objects
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-// Event listener for clicks on meshes
 window.addEventListener('mousedown', (event) => {
-    // Update mouse position for raycasting
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(meshes);
 
-    // If a mesh was clicked, animate the camera to focus on it
     if (intersects.length > 0) {
         const selectedMesh = intersects[0].object;
 
-        // Calculate the target position for the camera to "zoom in" on the mesh
         const targetPosition = {
             x: selectedMesh.position.x,
             y: selectedMesh.position.y + 1,
             z: selectedMesh.position.z + 2
         };
 
-        // Animate the camera to the target position and look at the selected mesh
         gsap.to(camera.position, {
             x: targetPosition.x,
             y: targetPosition.y,
@@ -92,7 +83,6 @@ window.addEventListener('mousedown', (event) => {
     }
 });
 
-// Reset button functionality to return camera to its initial position
 document.getElementById('resetButton').addEventListener('click', function () {
     gsap.to(camera.position, {
         x: initialPosition.x,
