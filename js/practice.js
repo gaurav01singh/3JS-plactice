@@ -4,17 +4,16 @@
 
     import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-    import nebula from '../img/nebula.jpg';
+    // import nebula from '../img/nebula.jpg';
     import T7 from '../img/T7.jpeg';
     import stars from '../img/stars.jpg';
 
-    const monkeyUrl = new URL('../assests/monkey.glb', import.meta.url);
+    // const monkeyUrl = new URL('../assests/monkey.glb', import.meta.url);
 
-    const renderer = new  THREE.WebGLRenderer()
-
-    renderer.shadowMap.enabled = true;
-
+    const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: see });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.shadowMap.enabled = true;
 
     document.body.appendChild(renderer.domElement);
 
@@ -54,7 +53,8 @@
     const planeGeometry = new THREE.PlaneGeometry(30, 30);
     const planeMaterial = new THREE.MeshStandardMaterial({
         color: 0xFFFFFF,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        opacity:0
     });
     const plane = new THREE.Mesh(planeGeometry, planeMaterial);
     scene.add(plane);
@@ -134,19 +134,19 @@
     const lastPointZ = plane2.geometry.attributes.position.array.length - 1;
     plane2.geometry.attributes.position.array[lastPointZ] -= 10 * Math.random();
 
-    const assetLoader = new GLTFLoader();
+    // const assetLoader = new GLTFLoader();
 
 
-    assetLoader.load(monkeyUrl.href, function(gltf) {
-        const model = gltf.scene;
-        scene.add(model);
-        model.position.set(-12, 4, 10);
+    // assetLoader.load(monkeyUrl.href, function(gltf) {
+    //     const model = gltf.scene;
+    //     scene.add(model);
+    //     model.position.set(-12, 4, 10);
         
 
 
-    }, undefined, function(error) {
-        console.error(error);
-    });
+    // }, undefined, function(error) {
+    //     console.error(error);
+    // });
 
 
     const gui = new dat.GUI()
@@ -191,7 +191,7 @@
         box.rotation.y =time/1000;
         
         step += options.speed;
-        sphere.position.y = 10*Math.abs(Math.sin(step))
+        sphere.position.y = 4+10*Math.abs(Math.sin(step))
         spotligth.angle=options.angle
         spotligth.penumbra=options.penumbra
         spotligth.intensity=options.intensity
@@ -209,10 +209,10 @@
                 intersects[i].object.rotation.y = time / 1000;
             }
         }
-        plane2.geometry.attributes.position.array[0] = 10 * Math.random();
-        plane2.geometry.attributes.position.array[1] = 10 * Math.random();
-        plane2.geometry.attributes.position.array[2] = 10 * Math.random();
-        plane2.geometry.attributes.position.array[lastPointZ] = 10 * Math.random();
+        plane2.geometry.attributes.position.array[0] = Math.sin( Math.random());
+        plane2.geometry.attributes.position.array[1] = Math.sin( Math.random());
+        plane2.geometry.attributes.position.array[2] = Math.sin( Math.random());
+        plane2.geometry.attributes.position.array[lastPointZ] = Math.sin( Math.random());
         plane2.geometry.attributes.position.needsUpdate = true;
         renderer.render(scene,camera)
     }
